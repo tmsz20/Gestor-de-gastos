@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>FINANCE - Configuración</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            font-family: 'Inter', -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            min-height: max(884px, 100dvh);
+            margin: 0;
+        }
+        .quiet-card { background-color: #1E1E1E; border: 1px solid #2C2C2C; }
+        .input-underline { border: 0; border-bottom: 1px solid #2C2C2C; background: transparent; outline: none; transition: border-color 0.2s ease; }
+        .input-underline:focus { border-bottom-color: #ffffff; }
+        .glass-layer { backdrop-filter: blur(10px); background: rgba(30, 30, 30, 0.8); }
+    </style>
+  </head>
+<body style="background:#0A0A0A; color:#e5e2e1; font-family:Inter,-apple-system,sans-serif; margin:0; padding-bottom:128px;">
+<!-- TopAppBar -->
+<header style="position:fixed; top:0; width:100%; z-index:50; background:#141313; display:flex; justify-content:space-between; align-items:center; padding:0 24px; height:64px;">
+<div style="display:flex; align-items:center; gap:16px;">
+<span class="material-symbols-outlined" style="color:#ffffff;">menu</span>
+<h1 style="font-size:24px; font-weight:600; letter-spacing:-0.01em; color:#ffffff; margin:0;">FINANCE</h1>
+</div>
+<div>
+<span class="material-symbols-outlined" style="color:#ffffff;">notifications</span>
+</div>
+</header>
+
+<main style="margin-top:80px; padding-left:24px; padding-right:24px; max-width:672px; margin-left:auto; margin-right:auto; display:flex; flex-direction:column; gap:32px;">
+<!-- Section: Config Title -->
+<section>
+<h2 style="font-size:20px; font-weight:600; color:#ffffff; margin:0;">CONFIGURACIÓN</h2>
+</section>
+
+<!-- Brief Info Card -->
+<div class="quiet-card" style="padding:24px; border-radius:12px; display:flex; align-items:flex-start; gap:16px;">
+<span class="material-symbols-outlined" style="color:#8e9192; font-variation-settings:'FILL' 1;">info</span>
+<p style="font-size:14px; color:#c4c7c8; margin:0; line-height:1.6;">
+Define tus parámetros financieros para obtener proyecciones precisas. Tu sueldo y gastos fijos son la base de tu salud financiera.
+</p>
+</div>
+
+<!-- Editable Card: Sueldo Mensual -->
+<section class="quiet-card" style="padding:24px; border-radius:12px;">
+<label style="font-size:12px; font-weight:600; color:#c4c7c8; display:block; margin-bottom:8px;">Sueldo Mensual</label>
+<div style="display:flex; align-items:baseline; gap:8px;">
+<span style="font-size:24px; font-weight:600; color:#ffffff;">ARS</span>
+<input class="input-underline" type="text" value="850.000,00" style="font-size:24px; font-weight:600; color:#ffffff; width:100%; padding:8px 0;"/>
+</div>
+</section>
+
+<!-- Section: Gastos Fijos -->
+<section style="display:flex; flex-direction:column; gap:24px;">
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<h3 style="font-size:20px; font-weight:600; color:#ffffff; margin:0;">Gastos Fijos</h3>
+<button style="display:flex; align-items:center; gap:4px; color:#ffffff; font-size:12px; font-weight:600; border:1px solid #484949; padding:4px 12px; border-radius:9999px; background:transparent; cursor:pointer;">
+<span class="material-symbols-outlined" style="font-size:18px;">add</span> Nuevo Gasto
+</button>
+</div>
+<div class="quiet-card" style="border-radius:12px; overflow:hidden;">
+<table style="width:100%; text-align:left; border-collapse:collapse;">
+<thead style="background:#1c1b1b;">
+<tr>
+<th style="padding:12px; font-size:12px; font-weight:600; color:#c4c7c8; border-bottom:1px solid rgba(68,71,72,0.2);">Categoría</th>
+<th style="padding:12px; font-size:12px; font-weight:600; color:#c4c7c8; border-bottom:1px solid rgba(68,71,72,0.2); text-align:right;">Monto (ARS)</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom:1px solid rgba(68,71,72,0.1);">
+<td style="padding:12px; font-size:14px; color:#e5e2e1;">Alquiler</td>
+<td style="padding:12px; font-size:14px; color:#e5e2e1; text-align:right;">320.000,00</td>
+</tr>
+<tr style="border-bottom:1px solid rgba(68,71,72,0.1);">
+<td style="padding:12px; font-size:14px; color:#e5e2e1;">Servicios &amp; Internet</td>
+<td style="padding:12px; font-size:14px; color:#e5e2e1; text-align:right;">45.000,00</td>
+</tr>
+<tr style="border-bottom:1px solid rgba(68,71,72,0.1);">
+<td style="padding:12px; font-size:14px; color:#e5e2e1;">Expensas</td>
+<td style="padding:12px; font-size:14px; color:#e5e2e1; text-align:right;">60.000,00</td>
+</tr>
+<tr>
+<td style="padding:12px; font-size:14px; color:#e5e2e1; font-weight:600;">Total gastos fijos</td>
+<td style="padding:12px; font-size:14px; color:#ffffff; text-align:right; font-weight:600;">425.000,00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- Section: Meta de Ahorro -->
+<section class="quiet-card" style="padding:24px; border-radius:12px; display:flex; flex-direction:column; gap:16px;">
+<div style="display:flex; justify-content:space-between; align-items:flex-end;">
+<div>
+<h3 style="font-size:20px; font-weight:600; color:#ffffff; margin:0;">Meta de Ahorro</h3>
+<p style="font-size:14px; color:#c4c7c8; margin:0;">Objetivo: 20% del ingreso</p>
+</div>
+<div style="text-align:right;">
+<span style="font-size:20px; font-weight:600; color:#ffffff;">75%</span>
+</div>
+</div>
+<div style="height:4px; width:100%; background:#484949; border-radius:2px; overflow:hidden;">
+<div style="height:100%; background:#ffffff; width:75%; border-radius:2px;"></div>
+</div>
+<div style="display:flex; justify-content:space-between; color:#c4c7c8; font-size:12px; font-weight:600; padding-top:8px;">
+<div>
+<p style="margin:0;">Actual</p>
+<p style="color:#ffffff; margin:0;">ARS 127.500</p>
+</div>
+<div style="text-align:right;">
+<p style="margin:0;">Objetivo</p>
+<p style="color:#ffffff; margin:0;">ARS 170.000</p>
+</div>
+</div>
+</section>
+
+<!-- Summary Card -->
+<section style="background:#2a2a2a; padding:24px; border-radius:12px; border:1px solid rgba(255,255,255,0.1);">
+<h3 style="font-size:12px; font-weight:600; color:#c4c7c8; margin:0 0 16px 0;">Resumen de Distribución</h3>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+<div>
+<p style="font-size:32px; font-weight:700; color:#ffffff; margin:0;">50%</p>
+<p style="font-size:14px; color:#b8b8b8; margin:0;">Gasto Fijo</p>
+</div>
+<div style="border-left:1px solid rgba(68,71,72,0.3); padding-left:16px;">
+<p style="font-size:32px; font-weight:700; color:#ffffff; margin:0;">ARS 425k</p>
+<p style="font-size:14px; color:#b8b8b8; margin:0;">Remanente</p>
+</div>
+</div>
+</section>
+
+<!-- Action Buttons -->
+<footer style="display:flex; flex-direction:column; gap:16px; padding-top:8px;">
+<button style="width:100%; background:#ffffff; color:#0A0A0A; padding:16px; border-radius:8px; border:none; font-size:20px; font-weight:600; cursor:pointer;">
+Guardar configuración
+</button>
+<button style="width:100%; background:transparent; color:#c4c7c8; padding:8px; border-radius:8px; border:none; font-size:12px; font-weight:600; cursor:pointer;">
+Cancelar cambios
+</button>
+</footer>
+</main>
+
+<!-- BottomNavBar -->
+<nav style="position:fixed; bottom:0; width:100%; z-index:50; padding-bottom:env(safe-area-inset-bottom,0); border-top:1px solid #484949; background:#141313; display:flex; justify-content:space-around; align-items:center; height:80px; padding:0 24px;">
+<div style="display:flex; flex-direction:column; align-items:center; color:#b8b8b8;">
+<span class="material-symbols-outlined">dashboard</span>
+<span style="font-size:12px; font-weight:600;">Dashboard</span>
+</div>
+<div style="display:flex; flex-direction:column; align-items:center; color:#b8b8b8;">
+<span class="material-symbols-outlined">history</span>
+<span style="font-size:12px; font-weight:600;">Historial</span>
+</div>
+<div style="display:flex; flex-direction:column; align-items:center; color:#ffffff;">
+<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">settings</span>
+<span style="font-size:12px; font-weight:600;">Configuración</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,33 @@
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  transition: border-color 0.2s;
+}
+
+.card:active {
+  border-color: var(--divider);
+}
+
+.balance {
+  padding: var(--space-2xl);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.balance::after {
+  content: '';
+  position: absolute;
+  right: -16px;
+  top: -16px;
+  width: 96px;
+  height: 96px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  filter: blur(24px);
+  pointer-events: none;
+}

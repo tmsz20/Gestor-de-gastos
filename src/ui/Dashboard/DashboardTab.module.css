@@ -1,0 +1,253 @@
+.dashboard {
+  max-width: 512px;
+  margin: 0 auto;
+  padding-bottom: 64px;
+  animation: fadeSlideIn 0.35s ease-out;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 24px;
+}
+
+.emptyCard {
+  text-align: center;
+  padding: 32px 24px;
+  max-width: 340px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.emptyIconWrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--alert-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--alert-text);
+}
+
+.emptyTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 10px;
+}
+
+.emptyText {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0 0 24px;
+  max-width: 260px;
+}
+
+.emptyCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--action);
+  color: var(--action-text);
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.emptyCta:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+/* Section spacing — Stitch uses 48px between major sections */
+.section {
+  margin-bottom: 48px;
+}
+
+.sectionTop {
+  margin-bottom: 24px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 24px 0;
+}
+
+.sectionHeader .sectionTitle {
+  margin-bottom: 0;
+}
+
+.seeAll {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.seeAll:hover {
+  color: var(--action);
+}
+
+/* Balance card */
+.cardLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+}
+
+.balanceAmount {
+  font-size: var(--font-display);
+  font-weight: 700;
+  color: var(--action);
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 40px;
+}
+
+.trendLine {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.trendIcon {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1;
+}
+
+.trendText {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.gridCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 96px;
+  padding: 12px;
+}
+
+.gridLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.gridValue {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 28px;
+  margin-top: auto;
+}
+
+/* Fixed expenses */
+.fixedRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.fixedRowBorder {
+  border-bottom: 1px solid var(--divider);
+  padding-bottom: 12px;
+}
+
+.fixedName {
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+.fixedAmount {
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+.fixedTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+}
+
+.fixedTotalLabel {
+  font-size: 16px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.fixedTotalValue {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Alerts */
+.alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.alert {
+  background: var(--alert-bg);
+  color: var(--alert-text);
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  border: 1px solid rgba(255, 180, 171, 0.15);
+}

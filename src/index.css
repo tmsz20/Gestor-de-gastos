@@ -1,0 +1,94 @@
+/* ── Reset ─────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  font-family: 'Inter', 'SF Pro Display', 'SF Pro Text', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+input,
+button,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ── CSS Variables ─────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg-primary: #0A0A0A;
+  --bg-card: #1E1E1E;
+  --bg-surface: #141313;
+  --border: #2C2C2C;
+  --divider: #353434;
+
+  /* Text */
+  --text-primary: #e5e2e1;
+  --text-secondary: #c4c7c8;
+
+  /* Accent — now white, consistent with Stitch design */
+  --accent: #ffffff;
+
+  /* Primary action (white) */
+  --action: #ffffff;
+  --action-text: #0A0A0A;
+
+  /* Action hover */
+  --action-hover: #e5e5e5;
+
+  /* Semantic */
+  --success: #4caf50;
+  --danger: #ffb4ab;
+  --alert-bg: rgba(255, 180, 171, 0.12);
+  --alert-text: #ffb4ab;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 20px;
+  --space-2xl: 24px;
+  --space-3xl: 32px;
+  --space-4xl: 48px;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-fab: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-fab-hover: 0 6px 16px rgba(0, 0, 0, 0.5);
+  --shadow-drawer: -4px 0 24px rgba(0, 0, 0, 0.3);
+
+  /* Typography */
+  --font-caption: 12px;
+  --font-small: 14px;
+  --font-body: 16px;
+  --font-subtitle: 18px;
+  --font-title: 20px;
+  --font-headline: 24px;
+  --font-display: 32px;
+}

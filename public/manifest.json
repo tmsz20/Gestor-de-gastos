@@ -1,0 +1,24 @@
+{
+  "name": "Gestor de Gastos",
+  "short_name": "Gastos",
+  "description": "Gestor de finanzas personales offline",
+  "start_url": "/",
+  "scope": "/",
+  "theme_color": "#1a1a2e",
+  "background_color": "#16213e",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

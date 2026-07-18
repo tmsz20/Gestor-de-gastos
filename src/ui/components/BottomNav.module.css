@@ -1,0 +1,54 @@
+.nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 80px;
+  padding: 0 24px;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s, transform 0.12s;
+}
+
+.tab:active {
+  transform: scale(0.9);
+}
+
+.tab.active {
+  color: var(--action);
+}
+
+.icon {
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+
+.activeIcon {
+  color: var(--action);
+}
+
+.label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}

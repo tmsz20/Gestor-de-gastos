@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>FINANCE - Historial</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            font-family: 'Inter', -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
+            min-height: max(884px, 100dvh);
+            margin: 0;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(30, 30, 30, 0.8); backdrop-filter: blur(10px); }
+    </style>
+  </head>
+<body style="background:#0A0A0A; color:#e5e2e1; font-family:Inter,-apple-system,sans-serif; margin:0; overflow-x:hidden;">
+<!-- Top AppBar -->
+<header style="position:fixed; top:0; width:100%; z-index:50; background:#141313; display:flex; justify-content:space-between; align-items:center; padding:0 24px; height:64px;">
+<div style="color:#ffffff;"><span class="material-symbols-outlined">menu</span></div>
+<h1 style="font-size:24px; font-weight:600; letter-spacing:-0.01em; color:#ffffff; margin:0;">FINANCE</h1>
+<div style="color:#ffffff;"><span class="material-symbols-outlined">notifications</span></div>
+</header>
+
+<main style="padding-top:88px; padding-bottom:128px; padding-left:24px; padding-right:24px; max-width:448px; margin:0 auto;">
+<!-- Screen Title -->
+<div style="margin-bottom:24px;">
+<h2 style="font-size:24px; font-weight:600; color:#ffffff; margin:0;">HISTORIAL</h2>
+</div>
+
+<!-- Summary Card -->
+<div style="background:#1E1E1E; border-radius:12px; padding:24px; margin-bottom:24px; border:1px solid #2C2C2C; position:relative; overflow:hidden;">
+<div style="position:absolute; right:-16px; top:-16px; width:96px; height:96px; background:rgba(255,255,255,0.05); border-radius:50%; filter:blur(24px);"></div>
+<p style="font-size:12px; font-weight:600; color:#b8b8b8; margin:0 0 4px 0; text-transform:uppercase;">Gasto total del mes</p>
+<div style="display:flex; align-items:baseline; gap:8px;">
+<span style="font-size:24px; font-weight:600; color:#ffffff;">$485.200</span>
+<span style="font-size:14px; color:#b8b8b8;">ARS</span>
+</div>
+<div style="display:flex; align-items:center; gap:4px; margin-top:12px;">
+<span class="material-symbols-outlined" style="font-size:16px; color:#ffffff;">trending_down</span>
+<p style="font-size:14px; color:#ffffff; margin:0;">-5% vs mes anterior</p>
+</div>
+</div>
+
+<!-- Search & Filter Bar -->
+<div style="display:flex; gap:12px; margin-bottom:48px;">
+<div style="position:relative; flex:1;">
+<span class="material-symbols-outlined" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:#b8b8b8; font-size:20px;">search</span>
+<input type="text" placeholder="Buscar transacciones..." style="width:100%; background:#1E1E1E; border:1px solid #2C2C2C; border-radius:8px; padding:12px 12px 12px 40px; font-size:14px; color:#e5e2e1; box-sizing:border-box;"/>
+</div>
+<button style="background:#1E1E1E; border:1px solid #2C2C2C; padding:12px; border-radius:8px; color:#ffffff; cursor:pointer;">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+
+<!-- Transaction Group: Hoy -->
+<section style="margin-bottom:24px;">
+<h3 style="font-size:12px; font-weight:600; color:#b8b8b8; margin:0 0 12px 4px;">HOY</h3>
+<div style="display:flex; flex-direction:column; gap:12px;">
+<!-- Item 1 -->
+<div style="display:flex; align-items:center; gap:12px; padding:12px; background:#1E1E1E; border-radius:12px; border:1px solid #2C2C2C;">
+<div style="width:48px; height:48px; border-radius:50%; background:#201f1f; display:flex; align-items:center; justify-content:center;">
+<span class="material-symbols-outlined" style="color:#ffffff;">restaurant</span>
+</div>
+<div style="flex:1;">
+<p style="font-size:16px; color:#ffffff; margin:0; line-height:1.2;">Almuerzo Ejecutivo</p>
+<span style="color:#b8b8b8; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">Gastronomía</span>
+</div>
+<div style="text-align:right;">
+<p style="font-size:16px; color:#ffffff; margin:0;">-$12.500</p>
+<p style="font-size:14px; color:#b8b8b8; margin:0;">13:45</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div style="display:flex; align-items:center; gap:12px; padding:12px; background:#1E1E1E; border-radius:12px; border:1px solid #2C2C2C;">
+<div style="width:48px; height:48px; border-radius:50%; background:#201f1f; display:flex; align-items:center; justify-content:center;">
+<span class="material-symbols-outlined" style="color:#ffffff;">shopping_bag</span>
+</div>
+<div style="flex:1;">
+<p style="font-size:16px; color:#ffffff; margin:0; line-height:1.2;">Supermercado Nordelta</p>
+<span style="color:#b8b8b8; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">Hogar</span>
+</div>
+<div style="text-align:right;">
+<p style="font-size:16px; color:#ffffff; margin:0;">-$45.200</p>
+<p style="font-size:14px; color:#b8b8b8; margin:0;">09:30</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Transaction Group: Ayer -->
+<section style="margin-bottom:24px;">
+<h3 style="font-size:12px; font-weight:600; color:#b8b8b8; margin:0 0 12px 4px;">AYER</h3>
+<div style="display:flex; flex-direction:column; gap:12px;">
+<div style="display:flex; align-items:center; gap:12px; padding:12px; background:#1E1E1E; border-radius:12px; border:1px solid #2C2C2C;">
+<div style="width:48px; height:48px; border-radius:50%; background:#201f1f; display:flex; align-items:center; justify-content:center;">
+<span class="material-symbols-outlined" style="color:#ffffff;">directions_car</span>
+</div>
+<div style="flex:1;">
+<p style="font-size:16px; color:#ffffff; margin:0; line-height:1.2;">Combustible Shell</p>
+<span style="color:#b8b8b8; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">Transporte</span>
+</div>
+<div style="text-align:right;">
+<p style="font-size:16px; color:#ffffff; margin:0;">-$18.000</p>
+<p style="font-size:14px; color:#b8b8b8; margin:0;">19:20</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Transaction Group: Fechas Anteriores -->
+<section style="margin-bottom:48px;">
+<h3 style="font-size:12px; font-weight:600; color:#b8b8b8; margin:0 0 12px 4px;">FECHAS ANTERIORES</h3>
+<div style="display:flex; flex-direction:column; gap:12px;">
+<div style="display:flex; align-items:center; gap:12px; padding:12px; background:#1E1E1E; border-radius:12px; border:1px solid #2C2C2C;">
+<div style="width:48px; height:48px; border-radius:50%; background:#201f1f; display:flex; align-items:center; justify-content:center;">
+<span class="material-symbols-outlined" style="color:#ffffff;">subscriptions</span>
+</div>
+<div style="flex:1;">
+<p style="font-size:16px; color:#ffffff; margin:0; line-height:1.2;">Netflix Premium</p>
+<span style="color:#b8b8b8; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">Entretenimiento</span>
+</div>
+<div style="text-align:right;">
+<p style="font-size:16px; color:#ffffff; margin:0;">-$9.800</p>
+<p style="font-size:14px; color:#b8b8b8; margin:0;">25 Oct</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<!-- Floating Action Button -->
+<button style="position:fixed; bottom:96px; right:24px; width:56px; height:56px; background:#ffffff; color:#0A0A0A; border-radius:50%; border:none; box-shadow:0 4px 24px rgba(0,0,0,0.4); cursor:pointer; z-index:50; display:flex; align-items:center; justify-content:center;">
+<span class="material-symbols-outlined" style="font-size:32px; font-variation-settings:'wght' 500;">add</span>
+</button>
+
+<!-- Bottom Navigation Bar -->
+<nav style="position:fixed; bottom:0; width:100%; z-index:50; padding-bottom:env(safe-area-inset-bottom,0); border-top:1px solid #484949; background:#141313; display:flex; justify-content:space-around; align-items:center; height:80px; padding:0 24px;">
+<div style="display:flex; flex-direction:column; align-items:center; color:#b8b8b8;">
+<span class="material-symbols-outlined">dashboard</span>
+<span style="font-size:12px; font-weight:600;">Dashboard</span>
+</div>
+<div style="display:flex; flex-direction:column; align-items:center; color:#ffffff;">
+<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">history</span>
+<span style="font-size:12px; font-weight:600;">Historial</span>
+</div>
+<div style="display:flex; flex-direction:column; align-items:center; color:#b8b8b8;">
+<span class="material-symbols-outlined">settings</span>
+<span style="font-size:12px; font-weight:600;">Configuración</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,64 @@
+.wrapper {
+  position: fixed;
+  bottom: calc(80px + 12px + env(safe-area-inset-bottom, 0px));
+  right: 24px;
+  z-index: 40;
+}
+
+.extended {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 22px;
+  background: var(--action);
+  color: var(--action-text);
+  border: none;
+  border-radius: 9999px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  transition: transform 0.12s, box-shadow 0.2s;
+}
+
+.extended:hover {
+  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.6);
+}
+
+.extended:active {
+  transform: scale(0.95);
+}
+
+.circular {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--action);
+  color: var(--action-text);
+  border: none;
+  border-radius: 50%;
+  font-family: inherit;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.15s;
+}
+
+.circular:active {
+  transform: scale(0.88);
+}
+
+.icon {
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 500;
+}
+
+.label {
+  white-space: nowrap;
+}

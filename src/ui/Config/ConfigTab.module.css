@@ -1,0 +1,464 @@
+.config {
+  max-width: 512px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Info card */
+.infoCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  color: var(--text-secondary);
+}
+
+.infoCard p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Generic card */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cardTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Fields */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fieldLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.input {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 16px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: var(--action);
+  outline: none;
+}
+
+.submitBtn {
+  margin-top: 4px;
+  padding: 14px;
+  background: var(--action);
+  color: var(--action-text);
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.submitBtn:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+/* Summary */
+.summaryGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+.summaryItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  padding: 8px 4px;
+}
+
+.summaryValue {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.summaryLabel {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-weight: 500;
+}
+
+/* Fixed expenses section */
+.fixedSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fixedHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fixedHeader .cardTitle {
+  margin: 0;
+}
+
+.addPill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: transparent;
+  color: var(--action);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.addPill:active {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Inline form */
+.inlineForm {
+  display: flex;
+  gap: 8px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--divider);
+}
+
+.inlineInput {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-family: inherit;
+  min-width: 0;
+  transition: border-color 0.2s;
+}
+
+.inlineInput:focus {
+  border-color: var(--action);
+  outline: none;
+}
+
+.addBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: var(--action);
+  color: var(--action-text);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.addBtn:active {
+  transform: scale(0.94);
+  opacity: 0.9;
+}
+
+/* Empty list */
+.emptyList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 24px 16px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.emptyHint {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* Table */
+.expenseTable {
+  display: flex;
+  flex-direction: column;
+}
+
+.tableHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--divider);
+}
+
+.tableRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--divider);
+}
+
+.tableRow:last-of-type {
+  border-bottom: none;
+}
+
+.expenseName {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.expenseRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.expenseAmount {
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.rowActions {
+  display: flex;
+  gap: 2px;
+}
+
+.rowBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color 0.15s;
+}
+
+.rowBtn:hover {
+  color: var(--text-primary);
+}
+
+.tableTotal {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0 0;
+  border-top: 1px solid var(--divider);
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.tableTotal strong {
+  font-weight: 700;
+}
+
+/* Prefix input */
+.prefixField {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-primary);
+  overflow: hidden;
+}
+
+.prefix {
+  padding: 12px 14px;
+  font-size: 16px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  border-right: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.prefixInput {
+  flex: 1;
+  padding: 12px 14px;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 16px;
+  font-family: inherit;
+  min-width: 0;
+}
+
+.prefixInput:focus {
+  outline: none;
+}
+
+/* Card subtitle */
+.cardSubtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Savings labels */
+.savingsLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.savingsLabel {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Distribution grid */
+.distGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.distItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.distValue {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.distLabel {
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Cancel button */
+.cancelBtn {
+  display: block;
+  margin: 0 auto;
+  padding: 12px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.cancelBtn:hover {
+  color: var(--text-primary);
+}
+
+/* Submit button full width */
+.submitBtn {
+  width: 100%;
+}
+
+/* Edit row */
+.editRow {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  width: 100%;
+}
+
+.editInput {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-family: inherit;
+  min-width: 0;
+  transition: border-color 0.2s;
+}
+
+.editInput:focus {
+  border-color: var(--action);
+  outline: none;
+}
+
+.editAction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color 0.15s;
+}
+
+.editAction:hover {
+  color: var(--text-primary);
+}

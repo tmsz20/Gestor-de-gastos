@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import type { Alert } from '@/domain/models';
-import { evaluateAlerts, type AlertContext } from '@/domain/calculator';
-import { getCurrentPeriod } from '@/domain/calculator';
+import { evaluateAlerts, type AlertContext, getCurrentPeriod, todayDate } from '@/domain/calculator';
 import { useTransactionStore } from './transactionStore';
 import { useBudgetStore } from './budgetStore';
 
@@ -13,11 +12,6 @@ interface AlertState {
 
   /** Descarta una alerta específica por ID */
   dismissAlert: (id: string) => void;
-}
-
-function todayDate(): Date {
-  const now = new Date();
-  return new Date(now.getFullYear(), now.getMonth(), now.getDate());
 }
 
 export const useAlertStore = create<AlertState>()((set) => ({

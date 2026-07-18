@@ -1,36 +1,13 @@
 import { useState, useMemo, useRef, useCallback } from 'react';
 import { useTransactionStore, selectSpentPeriod } from '@/store/transactionStore';
 import { useBudgetStore } from '@/store/budgetStore';
+import { useAlertStore } from '@/store/alertStore';
 import { Category, ALL_CATEGORIES, CATEGORY_LABELS } from '@/domain/models';
-import { toISODate, getPreviousPeriod, spentInPeriod } from '@/domain/calculator';
+import { getPreviousPeriod, spentInPeriod, todayISO, yesterdayISO } from '@/domain/calculator';
 import { Icon } from '@/ui/components/Icon';
-import type { IconName } from '@/ui/components/Icon';
 import type { NavTab } from '@/ui/components/BottomNav';
+import { categoryIconName, formatCurrency } from '@/ui/helpers';
 import styles from './HistorialTab.module.css';
-
-function categoryIconName(cat: Category): IconName {
-  switch (cat) {
-    case Category.Comida: return 'food';
-    case Category.TransporteExtra: return 'car';
-    case Category.Entretenimiento: return 'entertainment';
-    case Category.TimbaCasino: return 'entertainment';
-    case Category.Salud: return 'health';
-    case Category.RopaCalzado: return 'shopping';
-    case Category.Otros: return 'shopping';
-    case Category.Imprevistos: return 'warning';
-    default: return 'shopping';
-  }
-}
-
-function todayISO(): string {
-  return toISODate(new Date());
-}
-
-function yesterdayISO(): string {
-  const d = new Date();
-  d.setDate(d.getDate() - 1);
-  return toISODate(d);
-}
 
 interface DateGroup {
   label: string;
@@ -54,7 +31,7 @@ interface HistorialTabProps {
   onNavigate?: (tab: NavTab) => void;
 }
 
-export function HistorialTab({ onNavigate }: HistorialTabProps) {
+export function HistorialTab(_props: HistorialTabProps) {
   const transactions = useTransactionStore((s) => s.transactions);
   const budget = useBudgetStore((s) => s.budget);
   const removeTransaction = useTransactionStore((s) => s.removeTransaction);
@@ -64,8 +41,6 @@ export function HistorialTab({ onNavigate }: HistorialTabProps) {
   const [pullDistance, setPullDistance] = useState(0);
   const touchStartY = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const format = (n: number) => `$${n.toLocaleString('es-AR')}`;
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     const container = containerRef.current;
@@ -87,12 +62,24 @@ export function HistorialTab({ onNavigate }: HistorialTabProps) {
 
   const handleTouchEnd = useCallback(() => {
     if (pullDistance > 60) {
-      // Trigger refresh (reload transactions)
-      window.location.reload();
+      // Trigger refresh (reload transactions and budget from DB without page reload)
+      Promise.all([
+        useTransactionStore.getState().hydrate(),
+        useBudgetStore.getState().hydrate(),
+      ]).then(() => {
+        useAlertStore.getState().recalculate();
+      });
     }
     setPulling(false);
     setPullDistance(0);
   }, [pullDistance]);
+
+  const handleDeleteTransaction = async (id: string) => {
+    if (window.confirm('¿Estás seguro de que querés eliminar este gasto?')) {
+      await removeTransaction(id);
+      useAlertStore.getState().recalculate();
+    }
+  };
 
   const filtered = useMemo(() => {
     let result = transactions;
@@ -151,7 +138,7 @@ export function HistorialTab({ onNavigate }: HistorialTabProps) {
       {/* Summary card */}
       <div className={styles.summaryCard}>
         <span className={styles.summaryLabel}>GASTO TOTAL DEL MES</span>
-        <span className={styles.summaryAmount}>{format(spentPeriod)}</span>
+        <span className={styles.summaryAmount}>{formatCurrency(spentPeriod)}</span>
         <span className={styles.summaryComparison}>{comparison.text}</span>
       </div>
 
@@ -210,12 +197,12 @@ export function HistorialTab({ onNavigate }: HistorialTabProps) {
                       <span className={styles.itemCategory}>{CATEGORY_LABELS[t.category]}</span>
                     </div>
                     <div className={styles.itemRight}>
-                      <span className={styles.itemAmount}>-{format(t.actualAmount ?? t.amount)}</span>
+                      <span className={styles.itemAmount}>-{formatCurrency(t.actualAmount ?? t.amount)}</span>
                       <span className={styles.itemDate}>{t.date}</span>
                     </div>
                     <button
                       className={styles.deleteBtn}
-                      onClick={() => removeTransaction(t.id)}
+                      onClick={() => handleDeleteTransaction(t.id)}
                       aria-label="Eliminar transacción"
                     >
                       <Icon name="close" size={14} />
@@ -227,15 +214,6 @@ export function HistorialTab({ onNavigate }: HistorialTabProps) {
           ))}
         </div>
       )}
-
-      {/* FAB */}
-      <button
-        className={styles.fab}
-        aria-label="Agregar gasto"
-        onClick={() => onNavigate?.('expenses')}
-      >
-        <Icon name="plus" size={24} />
-      </button>
     </div>
   );
 }

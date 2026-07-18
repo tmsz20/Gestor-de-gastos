@@ -251,3 +251,15 @@
   line-height: 1.4;
   border: 1px solid rgba(255, 180, 171, 0.15);
 }
+
+.topCardsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .topCardsGrid {
+    grid-template-columns: 1fr;
+  }
+}

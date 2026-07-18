@@ -1,5 +1,5 @@
-import { useBudgetStore, selectVariableBudget, selectTotalFixed } from '@/store/budgetStore';
-import { useTransactionStore, selectSpentPeriod, selectSpentCategoryPeriod } from '@/store/transactionStore';
+import { useBudgetStore, selectVariableBudget, selectTotalFixed, selectDailyBudget } from '@/store/budgetStore';
+import { useTransactionStore, selectSpentPeriod, selectSpentCategoryPeriod, selectSpentToday } from '@/store/transactionStore';
 import { useAlertStore } from '@/store/alertStore';
 import { periodSpendingRatio, getPreviousPeriod, spentInPeriod, getCurrentPeriod, parseDate } from '@/domain/calculator';
 import { ALL_CATEGORIES, CATEGORY_LABELS, Category } from '@/domain/models';
@@ -9,14 +9,11 @@ import { TransactionRow } from '@/ui/components/TransactionRow';
 import { BarChart, TopSpends } from '@/ui/components/Charts';
 import { Icon } from '@/ui/components/Icon';
 import type { NavTab } from '@/ui/components/BottomNav';
+import { formatCurrency } from '@/ui/helpers';
 import styles from './DashboardTab.module.css';
 
 function categoryIcon(cat: Category): string {
   return CATEGORY_EMOJIS[cat];
-}
-
-function format(n: number): string {
-  return `$${n.toLocaleString('es-AR')}`;
 }
 
 const CATEGORY_EMOJIS: Record<Category, string> = {
@@ -76,11 +73,16 @@ export function DashboardTab({ onNavigate }: DashboardTabProps) {
   }
 
   const transactions = useTransactionStore((s) => s.transactions);
-  const variable = selectVariableBudget() ?? 0;
-  const spentPeriod = selectSpentPeriod(budget.payDay);
+  const variable = useBudgetStore(selectVariableBudget) ?? 0;
+  const spentPeriod = useTransactionStore((s) => selectSpentPeriod(budget.payDay, s)) ?? 0;
   const remainingPeriod = Math.max(0, variable - spentPeriod);
-  const fixedTotal = selectTotalFixed();
+  const fixedTotal = useBudgetStore(selectTotalFixed) ?? 0;
   const progressRatio = periodSpendingRatio(variable, spentPeriod);
+
+  // Daily budget calculations
+  const daily = useBudgetStore(selectDailyBudget) ?? 0;
+  const spentToday = useTransactionStore(selectSpentToday) ?? 0;
+  const remainingDaily = Math.max(0, daily - spentToday);
 
   // Calculate month-over-month comparison
   const today = new Date();
@@ -123,45 +125,55 @@ export function DashboardTab({ onNavigate }: DashboardTabProps) {
       rank: i + 1,
       name: t.note || CATEGORY_LABELS[t.category],
       category: CATEGORY_LABELS[t.category],
-      amount: format(t.actualAmount ?? t.amount),
+      amount: formatCurrency(t.actualAmount ?? t.amount),
     }));
 
   return (
     <div className={styles.dashboard}>
-      {/* Balance card */}
+      {/* Top Cards Section (Monthly and Daily) */}
       <section className={styles.sectionTop}>
-        <Card variant="balance">
-          <span className={styles.cardLabel}>BALANCE DISPONIBLE DEL MES</span>
-          <h2 className={styles.balanceAmount}>{format(remainingPeriod)}</h2>
-          <div className={styles.trendLine}>
-            {prevSpent > 0 && (
-              <span className={styles.trendIcon}>
-                {spentPeriod > prevSpent ? '\u2191' : spentPeriod < prevSpent ? '\u2193' : '\u2022'}
-              </span>
-            )}
-            <span className={styles.trendText}>{comparisonText}</span>
-          </div>
-        </Card>
+        <div className={styles.topCardsGrid}>
+          <Card variant="balance">
+            <span className={styles.cardLabel}>DISPONIBLE MENSUAL</span>
+            <h2 className={styles.balanceAmount}>{formatCurrency(remainingPeriod)}</h2>
+            <div className={styles.trendLine}>
+              {prevSpent > 0 && (
+                <span className={styles.trendIcon}>
+                  {spentPeriod > prevSpent ? '\u2191' : spentPeriod < prevSpent ? '\u2193' : '\u2022'}
+                </span>
+              )}
+              <span className={styles.trendText}>{comparisonText}</span>
+            </div>
+          </Card>
+
+          <Card variant="balance">
+            <span className={styles.cardLabel}>PRESUPUESTO HOY</span>
+            <h2 className={styles.balanceAmount}>{formatCurrency(remainingDaily)}</h2>
+            <div className={styles.trendLine}>
+              <span className={styles.trendText}>Límite diario: {formatCurrency(daily)}</span>
+            </div>
+          </Card>
+        </div>
       </section>
 
-      {/* Grid 2 columns */}
+      {/* Grid 4 columns */}
       <section className={styles.sectionTop}>
         <div className={styles.grid}>
           <Card className={styles.gridCard}>
             <span className={styles.gridLabel}>Sueldo mensual</span>
-            <span className={styles.gridValue}>{format(budget.salaryAmount)}</span>
+            <span className={styles.gridValue}>{formatCurrency(budget.salaryAmount)}</span>
           </Card>
           <Card className={styles.gridCard}>
             <span className={styles.gridLabel}>Gastado este mes</span>
-            <span className={styles.gridValue}>{format(spentPeriod)}</span>
+            <span className={styles.gridValue}>{formatCurrency(spentPeriod)}</span>
           </Card>
           <Card className={styles.gridCard}>
-            <span className={styles.gridLabel}>Restante disponible</span>
-            <span className={styles.gridValue}>{format(remainingPeriod)}</span>
+            <span className={styles.gridLabel}>Gastado hoy</span>
+            <span className={styles.gridValue}>{formatCurrency(spentToday)}</span>
           </Card>
           <Card className={styles.gridCard}>
             <span className={styles.gridLabel}>Meta de ahorro</span>
-            <span className={styles.gridValue}>{format(budget.savingsGoal)}</span>
+            <span className={styles.gridValue}>{formatCurrency(budget.savingsGoal)}</span>
           </Card>
         </div>
       </section>
@@ -211,7 +223,7 @@ export function DashboardTab({ onNavigate }: DashboardTabProps) {
               icon={categoryIcon(category)}
               name={CATEGORY_LABELS[category]}
               description={CATEGORY_DESCRIPTIONS[category]}
-              amount={format(spent)}
+              amount={formatCurrency(spent)}
             />
           ))}
         </section>
@@ -228,12 +240,12 @@ export function DashboardTab({ onNavigate }: DashboardTabProps) {
                 className={`${styles.fixedRow} ${i < fixedExpenses.length - 1 ? styles.fixedRowBorder : ''}`}
               >
                 <span className={styles.fixedName}>{exp.name}</span>
-                <span className={styles.fixedAmount}>{format(exp.amount)}</span>
+                <span className={styles.fixedAmount}>{formatCurrency(exp.amount)}</span>
               </div>
             ))}
             <div className={styles.fixedTotal}>
               <span className={styles.fixedTotalLabel}>Total gastos fijos</span>
-              <strong className={styles.fixedTotalValue}>{format(fixedTotal)}</strong>
+              <strong className={styles.fixedTotalValue}>{formatCurrency(fixedTotal)}</strong>
             </div>
           </Card>
         </section>

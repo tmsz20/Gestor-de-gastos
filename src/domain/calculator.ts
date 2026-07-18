@@ -4,7 +4,7 @@ import { Category, RISK_CATEGORIES, ROPA_CALZADO_LIMIT } from './models';
 // ── Helpers ─────────────────────────────────────────────────
 
 /** Día actual como Date (sin hora) */
-function todayDate(): Date {
+export function todayDate(): Date {
   const now = new Date();
   return new Date(now.getFullYear(), now.getMonth(), now.getDate());
 }
@@ -27,6 +27,16 @@ export function toISODate(d: Date): string {
   const m = String(d.getMonth() + 1).padStart(2, '0');
   const day = String(d.getDate()).padStart(2, '0');
   return `${y}-${m}-${day}`;
+}
+
+export function todayISO(): string {
+  return toISODate(todayDate());
+}
+
+export function yesterdayISO(): string {
+  const d = todayDate();
+  d.setDate(d.getDate() - 1);
+  return toISODate(d);
 }
 
 // ── Período ─────────────────────────────────────────────────

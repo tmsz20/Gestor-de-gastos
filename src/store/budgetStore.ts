@@ -5,6 +5,7 @@ import {
   totalFixedExpenses,
   variableBudget,
   dailyBudget as calcDailyBudget,
+  todayDate,
 } from '@/domain/calculator';
 import { db } from '@/db/database';
 
@@ -32,41 +33,36 @@ interface BudgetState {
 
 // ── Helpers ─────────────────────────────────────────────────
 
-function todayDate(): Date {
-  const now = new Date();
-  return new Date(now.getFullYear(), now.getMonth(), now.getDate());
-}
-
 function generateId(): string {
   return crypto.randomUUID();
 }
 
 // ── Selectores derivados (no son parte del state, se calculan on-demand) ──
 
-export function selectPeriod(): Period | null {
-  const state = useBudgetStore.getState();
-  if (!state.budget) return null;
-  return getCurrentPeriod(todayDate(), state.budget.payDay);
+export function selectPeriod(state?: BudgetState): Period | null {
+  const s = state || useBudgetStore.getState();
+  if (!s.budget) return null;
+  return getCurrentPeriod(todayDate(), s.budget.payDay);
 }
 
-export function selectTotalFixed(): number {
-  const state = useBudgetStore.getState();
-  return totalFixedExpenses(state.fixedExpenses);
+export function selectTotalFixed(state?: BudgetState): number {
+  const s = state || useBudgetStore.getState();
+  return totalFixedExpenses(s.fixedExpenses);
 }
 
-export function selectVariableBudget(): number | null {
-  const state = useBudgetStore.getState();
-  if (!state.budget) return null;
-  const fixed = totalFixedExpenses(state.fixedExpenses);
-  return variableBudget(state.budget.salaryAmount, fixed, state.budget.savingsGoal);
+export function selectVariableBudget(state?: BudgetState): number | null {
+  const s = state || useBudgetStore.getState();
+  if (!s.budget) return null;
+  const fixed = totalFixedExpenses(s.fixedExpenses);
+  return variableBudget(s.budget.salaryAmount, fixed, s.budget.savingsGoal);
 }
 
-export function selectDailyBudget(): number | null {
-  const state = useBudgetStore.getState();
-  if (!state.budget) return null;
-  const period = getCurrentPeriod(todayDate(), state.budget.payDay);
-  const fixed = totalFixedExpenses(state.fixedExpenses);
-  const variable = variableBudget(state.budget.salaryAmount, fixed, state.budget.savingsGoal);
+export function selectDailyBudget(state?: BudgetState): number | null {
+  const s = state || useBudgetStore.getState();
+  if (!s.budget) return null;
+  const period = getCurrentPeriod(todayDate(), s.budget.payDay);
+  const fixed = totalFixedExpenses(s.fixedExpenses);
+  const variable = variableBudget(s.budget.salaryAmount, fixed, s.budget.savingsGoal);
   return calcDailyBudget(variable, period.days);
 }
 

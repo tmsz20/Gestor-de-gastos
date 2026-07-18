@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useBudgetStore, selectTotalFixed } from '@/store/budgetStore';
-import { selectSpentPeriod } from '@/store/transactionStore';
+import { useTransactionStore, selectSpentPeriod } from '@/store/transactionStore';
 import { useAlertStore } from '@/store/alertStore';
 import { Icon } from '@/ui/components/Icon';
 import { ProgressBar } from '@/ui/components/ProgressBar';
+import { formatCurrency } from '@/ui/helpers';
 import styles from './ConfigTab.module.css';
 
 export function ConfigTab() {
@@ -29,20 +30,19 @@ export function ConfigTab() {
   const [editName, setEditName] = useState('');
   const [editAmount, setEditAmount] = useState('');
 
-  const format = (n: number) => `$${n.toLocaleString('es-AR')}`;
   const formatK = (n: number) => {
     if (n >= 1000) return `ARS ${Math.round(n / 1000)}k`;
     return `ARS ${n}`;
   };
 
-  const fixedTotal = selectTotalFixed();
+  const fixedTotal = useBudgetStore(selectTotalFixed);
   const salaryNum = Number(salaryAmount) || budget?.salaryAmount || 0;
   const savingsNum = Number(savingsGoal) || budget?.savingsGoal || 0;
   const fixedPct = salaryNum > 0 ? Math.round((fixedTotal / salaryNum) * 100) : 0;
   const remaining = Math.max(0, salaryNum - fixedTotal - savingsNum);
 
   const variable = salaryNum - fixedTotal - savingsNum;
-  const spentPeriod = budget ? selectSpentPeriod(budget.payDay) : 0;
+  const spentPeriod = useTransactionStore((s) => selectSpentPeriod(budget?.payDay ?? (Number(payDay) || 5), s)) ?? 0;
   const saved = Math.max(0, variable - spentPeriod);
   const savingsProgressValue = savingsNum > 0 ? Math.min(1, saved / savingsNum) : 0;
   const savingsPct = salaryNum > 0 ? Math.round((savingsNum / salaryNum) * 100) : 0;
@@ -225,7 +225,7 @@ export function ConfigTab() {
                     <>
                       <span className={styles.expenseName}>{exp.name}</span>
                       <div className={styles.expenseRight}>
-                        <span className={styles.expenseAmount}>{format(exp.amount)}</span>
+                        <span className={styles.expenseAmount}>{formatCurrency(exp.amount)}</span>
                         <div className={styles.rowActions}>
                           <button onClick={() => startEdit(exp)} className={styles.rowBtn}>
                             <Icon name="settings" size={15} />
@@ -241,7 +241,7 @@ export function ConfigTab() {
               ))}
               <div className={styles.tableTotal}>
                 <span>Total gastos fijos</span>
-                <strong>{format(selectTotalFixed())}</strong>
+                <strong>{formatCurrency(useBudgetStore(selectTotalFixed))}</strong>
               </div>
             </div>
           )}
@@ -254,8 +254,8 @@ export function ConfigTab() {
         <p className={styles.cardSubtitle}>Objetivo: {savingsPct}% del ingreso</p>
         <ProgressBar value={savingsProgressValue} showPercentage={false} />
         <div className={styles.savingsLabels}>
-          <span className={styles.savingsLabel}>Actual ARS {format(saved)}</span>
-          <span className={styles.savingsLabel}>Objetivo ARS {format(savingsNum)}</span>
+          <span className={styles.savingsLabel}>Actual ARS {formatCurrency(saved)}</span>
+          <span className={styles.savingsLabel}>Objetivo ARS {formatCurrency(savingsNum)}</span>
         </div>
       </div>
 

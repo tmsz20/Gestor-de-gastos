@@ -1,35 +1,12 @@
 import { useState } from 'react';
 import { useTransactionStore, selectPeriodTransactions, selectCategoryTransactions, selectSpentPeriod } from '@/store/transactionStore';
 import { useBudgetStore } from '@/store/budgetStore';
+import { useAlertStore } from '@/store/alertStore';
 import { Category, ALL_CATEGORIES, CATEGORY_LABELS } from '@/domain/models';
-import { toISODate } from '@/domain/calculator';
+import { todayISO, yesterdayISO } from '@/domain/calculator';
 import { Icon } from '@/ui/components/Icon';
-import type { IconName } from '@/ui/components/Icon';
+import { categoryIconName, formatCurrency } from '@/ui/helpers';
 import styles from './TransactionList.module.css';
-
-function categoryIconName(cat: Category): IconName {
-  switch (cat) {
-    case Category.Comida: return 'food';
-    case Category.TransporteExtra: return 'car';
-    case Category.Entretenimiento: return 'entertainment';
-    case Category.TimbaCasino: return 'entertainment';
-    case Category.Salud: return 'health';
-    case Category.RopaCalzado: return 'shopping';
-    case Category.Otros: return 'shopping';
-    case Category.Imprevistos: return 'warning';
-    default: return 'shopping';
-  }
-}
-
-function todayISO(): string {
-  return toISODate(new Date());
-}
-
-function yesterdayISO(): string {
-  const d = new Date();
-  d.setDate(d.getDate() - 1);
-  return toISODate(d);
-}
 
 interface DateGroup {
   label: string;
@@ -54,7 +31,6 @@ export function TransactionList() {
 
   const spentPeriod = budget ? selectSpentPeriod(budget.payDay) : 0;
 
-  const format = (n: number) => `$${n.toLocaleString('es-AR')}`;
   const today = todayISO();
   const yesterday = yesterdayISO();
 
@@ -67,13 +43,20 @@ export function TransactionList() {
   if (yesterdayTxs.length > 0) groups.push({ label: 'AYER', transactions: yesterdayTxs });
   if (olderTxs.length > 0) groups.push({ label: 'FECHAS ANTERIORES', transactions: olderTxs });
 
+  const handleDeleteTransaction = async (id: string) => {
+    if (window.confirm('¿Estás seguro de que querés eliminar este gasto?')) {
+      await removeTransaction(id);
+      useAlertStore.getState().recalculate();
+    }
+  };
+
   return (
     <div className={styles.list}>
       {/* Summary card */}
       {budget && (
         <div className={styles.summaryCard}>
           <span className={styles.summaryLabel}>GASTO TOTAL DEL MES</span>
-          <span className={styles.summaryAmount}>{format(spentPeriod)}</span>
+          <span className={styles.summaryAmount}>{formatCurrency(spentPeriod)}</span>
         </div>
       )}
 
@@ -118,12 +101,12 @@ export function TransactionList() {
                       <span className={styles.itemCategory}>{CATEGORY_LABELS[t.category]}</span>
                     </div>
                     <div className={styles.itemRight}>
-                      <span className={styles.itemAmount}>-{format(t.actualAmount ?? t.amount)}</span>
+                      <span className={styles.itemAmount}>-{formatCurrency(t.actualAmount ?? t.amount)}</span>
                       <span className={styles.itemDate}>{t.date}</span>
                     </div>
                     <button
                       className={styles.delete}
-                      onClick={() => removeTransaction(t.id)}
+                      onClick={() => handleDeleteTransaction(t.id)}
                       title="Eliminar"
                     >
                       <Icon name="close" size={14} />

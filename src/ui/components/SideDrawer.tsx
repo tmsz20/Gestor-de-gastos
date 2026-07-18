@@ -25,7 +25,6 @@ const ITEMS: MenuItem[] = [
   { key: 'historial', label: 'Historial', icon: 'history' },
   { key: 'config', label: 'Configuración', icon: 'settings' },
   { key: 'export', label: 'Exportar datos', icon: 'arrow-right' },
-  { key: 'about', label: 'Acerca de la app', icon: 'arrow-right', disabled: true },
 ];
 
 export function SideDrawer({ isOpen, onClose, onNavigate }: SideDrawerProps) {
